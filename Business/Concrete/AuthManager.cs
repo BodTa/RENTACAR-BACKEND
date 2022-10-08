@@ -7,8 +7,10 @@ using Core.Utilites.DataResults;
 using Core.Utilites.Results;
 using Core.Utilites.Security.Hashing;
 using Core.Utilites.Security.Jwt;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOS;
+using System.Collections.Generic;
 
 namespace Business.Concrete
 {
@@ -17,18 +19,43 @@ namespace Business.Concrete
         private IUserService _userservice;
         private ITokenHelper tokenHelper;
         private ICustomerService customerService;
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper, ICustomerService customerService)
+        private IRefreshTokenDal _refreshTokenDal;
+
+        public AuthManager(IUserService userservice, ITokenHelper tokenHelper, ICustomerService customerService, IRefreshTokenDal refreshTokenDal)
         {
-            _userservice = userService;
-            this.customerService = customerService;
+            _userservice = userservice;
             this.tokenHelper = tokenHelper;
-                
+            this.customerService = customerService;
+            _refreshTokenDal = refreshTokenDal;
         }
+
+        public IDataResult<RefreshToken> AddRefreshToken(RefreshToken refreshToken)
+        {
+            var createdToken = _refreshTokenDal.Add(refreshToken);
+            return createdToken;
+        }
+        public IDataResult<RefreshToken> GetRefreshToken(string Token)
+        {
+            var refreshTokens = _refreshTokenDal.Get(r => r.Token == Token);
+            if(refreshTokens == null)
+            {
+                return new ErrorDataResult<RefreshToken>("Invalid refresh token");
+            }
+            return new SuccessDataResult<RefreshToken>(refreshTokens);
+        }
+
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
             var claims = _userservice.GetClaims(user);
             var accessToken = tokenHelper.CreateToken(user, claims);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
+        }
+
+        public IDataResult<RefreshToken> CreateRefreshToken(User user, string IpAdress)
+        {
+            RefreshToken refreshToken = tokenHelper.CreateRefreshToken(user, IpAdress);
+            return new SuccessDataResult<RefreshToken>(refreshToken);
+
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
@@ -69,11 +96,11 @@ namespace Business.Concrete
         {
             if (_userservice.GetByEmail(email).Data != null)
             {
-                return new ErrorResult(Messages.UserElreadyExists);
+                return new SuccessResult(Messages.UserElreadyExists);
 
             }
 
-            return new SuccessResult(Messages.UserNotFound);
+            return new ErrorResult(Messages.UserNotFound);
         }
     }
 }

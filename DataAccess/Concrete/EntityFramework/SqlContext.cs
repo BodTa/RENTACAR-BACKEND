@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Core.Utilites.Security.Jwt;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,6 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
         {
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<Customer>().ToTable("Customers");
+            //modelBuilder.Entity<RefreshToken>().HasNoKey();
         }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
@@ -27,5 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<User> Users { get; set; }
+
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

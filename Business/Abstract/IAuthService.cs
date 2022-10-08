@@ -16,5 +16,10 @@ namespace Business.Abstract
         IDataResult<User> Login(UserForLoginDto userForLoginDto);
         IResult UserExists(string email);
         IDataResult<AccessToken> CreateAccessToken(User user);
+
+        IDataResult<RefreshToken> CreateRefreshToken(User user, string IpAdress);
+
+        IDataResult<RefreshToken> AddRefreshToken(RefreshToken refreshToken);
+        IDataResult<RefreshToken> GetRefreshToken(string Token);
     }
 }

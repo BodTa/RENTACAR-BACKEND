@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31729.503
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{8312C3C6-4C5A-4D40-930A-C70BF21D0453}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{361F6B52-5A79-4212-A9B7-DCD6C2BF7849}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{F34E2682-17B8-4080-A397-B83FDA094753}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{32C5F4FA-B965-4F53-B444-47D0054B3F10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{361F6B52-5A79-4212-A9B7-DCD6C2BF7849}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{361F6B52-5A79-4212-A9B7-DCD6C2BF7849}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{361F6B52-5A79-4212-A9B7-DCD6C2BF7849}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F34E2682-17B8-4080-A397-B83FDA094753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F34E2682-17B8-4080-A397-B83FDA094753}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F34E2682-17B8-4080-A397-B83FDA094753}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F34E2682-17B8-4080-A397-B83FDA094753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32C5F4FA-B965-4F53-B444-47D0054B3F10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32C5F4FA-B965-4F53-B444-47D0054B3F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32C5F4FA-B965-4F53-B444-47D0054B3F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32C5F4FA-B965-4F53-B444-47D0054B3F10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

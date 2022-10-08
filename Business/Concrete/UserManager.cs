@@ -50,7 +50,8 @@ namespace Business.Concrete
 
         public IDataResult<User> GetByEmail(string email)
         {
-            return new SuccessDataResult<User>(_userDal.GetAll().SingleOrDefault(u=>u.Email==email));
+            var user = _userDal.GetAll().SingleOrDefault(u => u.Email == email);
+            return new SuccessDataResult<User>(user);
         }
 
         public IDataResult<UserDetailsDTO> GetDetailsById(int id)
@@ -76,7 +77,8 @@ namespace Business.Concrete
 
         public IDataResult<User> GetById(int id)
         {
-            throw new NotImplementedException();
+            var user = _userDal.Get(u => u.Id == id);
+            return new SuccessDataResult<User>(user);
         }
 
         public IDataResult<UserDetailsDTO> GetDetailsByEmail(string email)

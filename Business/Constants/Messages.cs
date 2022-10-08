@@ -7,26 +7,26 @@ namespace Business.Constants
 {
    public static class Messages
     {
-        public static string Added = "Ekleme işlemi başarılı";
-        public static string NameInvalid = "İsim geçersiz";
-        public static string Listed = "Listeleme işlemi başarılı";
-        public static string MaintenceTime = "Sunucu bakımdadır";
-        public static string NotAdded = "Ekleme işlemi başarısız";
-        public static string NotListed = "Listeleme işlemi başarısız";
-        public static string Deleted = "Kaldırma işlemi başarılı";
-        public static string Updated = "Güncelleme işlemi başarılı";
-        public static string UserRegistered = "Kayıt başarıyla gerçekleştirildi";
+        public static string Added = "Successfuly added";
+        public static string NameInvalid = "Invalid name";
+        public static string Listed = "Listed Successfuly";
+        public static string MaintenceTime = "Maintain time";
+        public static string NotAdded = "Adding does not completed.";
+        public static string NotListed = "Listing does not completed.";
+        public static string Deleted = "Successfuly deleted.";
+        public static string Updated = "Successfuly updated.";
+        public static string UserRegistered = "Successfuly signed up.";
 
-        public static string UserElreadyExists = "Böyle bir email'e kayıtlı kullanıcı bulunmaktadır";
+        public static string UserElreadyExists = "User already exist.";
 
-        public static string UserNotFound = "Böyle bir kullanıcı bulunamadı";
+        public static string UserNotFound = "User does not exist.";
 
-        public static string PasswordError = "Girilen şifre hatalıdır";
+        public static string PasswordError = "Email or Password is wrong.";
 
-        public static string SuccessfulLogin = " Başarıyla giriş yapıldı";
+        public static string SuccessfulLogin = "Sign in successfuly.";
 
-        public static string AccessTokenCreated = "Token oluşturuldu";
+        public static string AccessTokenCreated = "Token created.";
 
-        public static string AuthorizationDenied = "Yeterli yetkiniz bulunmamaktadır";
+        public static string AuthorizationDenied = "Not enough permission.";
     }
 }
