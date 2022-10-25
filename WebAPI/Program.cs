@@ -97,15 +97,13 @@ if (app.Environment.IsDevelopment())
 }
 app.ConfigureCustomExceptionMiddleware();
 
-app.UseCors(c => c.WithOrigins("http://localhost:3000").AllowCredentials().AllowAnyHeader());
+app.UseCors(c => c.WithOrigins("http://localhost:3000", "http://localhost:4200").AllowCredentials().AllowAnyHeader());
 
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthentication();
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

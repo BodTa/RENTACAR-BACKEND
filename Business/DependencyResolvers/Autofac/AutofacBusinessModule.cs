@@ -45,8 +45,16 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfCreditCartDal>().As<ICreditCartDal>().SingleInstance();
             builder.RegisterType<CreditCartManager>().As<ICreditCartService>().SingleInstance();
 
+            builder.RegisterType<EfUserOperationClamDal>().As<IUserOperationClaimDal>().SingleInstance();
+            builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>().SingleInstance();
+
+            builder.RegisterType<EfUserPictureDal>().As<IUserPictureDal>().SingleInstance();
+            builder.RegisterType<UserPictureManager>().As<IUserPictureService>().SingleInstance();
+
             builder.RegisterType<EfRefreshTokenDal>().As<IRefreshTokenDal>().SingleInstance();
 
+            builder.RegisterType<EfFavoriteDal>().As<IFavoriteDal>().SingleInstance();
+            builder.RegisterType<FavoriteManager>().As<IFavoriteService>().SingleInstance();
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,6 +11,8 @@ namespace Entities.DTOS
         public string LastName { get; set; }
         public int UserId { get; set; }
         public string Email { get; set; }
+
+        public UserPicture UserPicture { get; set; }
 
 
     }

@@ -16,6 +16,7 @@ namespace Business.Abstract
         IDataResult<UserDetailsDTO> GetDetailsById(int id);
         IDataResult <List<UserDetailsDTO>> UserDetails();
 
+        IDataResult<UserDetailsDTO> GetDetailsByUserId(int id);
         IResult UpdateByDto(UserForUpdateDTO user,int Id);
         IResult UpdatePassword(string password, string oldpassword,int Id);
     }

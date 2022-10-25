@@ -16,7 +16,12 @@ namespace Entities.Concrete
         public int ModelYear { get; set; }
         public decimal DailyPrice { get; set; }
         public string Description { get; set; }
-        public int DoorCount { get; set; }
+        public short DoorCount { get; set; }
+        public string FuelType { get; set; }
+        public short EngineCapacity { get; set; }
+        public short HorsePower { get; set; }
+        public int Kilometer { get; set; }
+        public string GearType { get; set; }
 
     }
 }

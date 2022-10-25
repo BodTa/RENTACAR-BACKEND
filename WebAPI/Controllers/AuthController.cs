@@ -3,12 +3,8 @@ using Core.Entities.Concrete;
 using Core.Utilites.DataResults;
 using Core.Utilites.Security.Jwt;
 using Entities.DTOS;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace WebAPI.Controllers
 {
@@ -58,7 +54,7 @@ namespace WebAPI.Controllers
             }
             else
             {
-                var userToLogin = _authService.Login(userForLoginDto);
+                 var userToLogin = _authService.Login(userForLoginDto);
                 if(userToLogin.Success)
                 {
                     var accessToken = _authService.CreateAccessToken(userToLogin.Data);
@@ -75,7 +71,7 @@ namespace WebAPI.Controllers
                 return BadRequest("Email or Password wrong.");
             }
         }
-        [HttpPost("refresh-token")]
+        [HttpGet("refresh-token")]
         public async Task<ActionResult<string>> RefreshToken()
         {
             var refreshToken = Request.Cookies["refreshToken"];
@@ -85,7 +81,6 @@ namespace WebAPI.Controllers
                 IDataResult<User> user = new SuccessDataResult<User>();
                 user = _userService.GetById(result.Data.UserId);
                 var token = _authService.CreateAccessToken(user.Data);
-                var newRefreshToken = _authService.CreateRefreshToken(user.Data, GetIpAddress());
                 return token.Data.Token;
             }
             return ("Invalid Refresh Token");

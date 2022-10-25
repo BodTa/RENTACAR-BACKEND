@@ -26,13 +26,13 @@ namespace Business.Concrete
         [ValidationAspect(typeof(RentalValidator))]
         public IResult add(Rental entity)
         {
-            var result = _Rent.GetAll().SingleOrDefault(p => p.CarId==entity.CarId && p.ReturnDate == entity.ReturnDate&&p.RentDate==entity.RentDate);
+            var result = _Rent.GetAll().SingleOrDefault(p => p.CarId==entity.CarId && p.ReturnDate >= entity.RentDate/*&&p.RentDate >=entity.RentDate*/);
             if (result == null)
             {
                 _Rent.Add(entity);
                 return new SuccessResult(Messages.Added);
             }
-            return new ErrorResult(Messages.NotAdded);
+            return new ErrorResult("Car is rented between given dates.");
 
         }
         [CacheRemoveAspect("IRentalService.Get")]

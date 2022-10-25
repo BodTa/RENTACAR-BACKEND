@@ -114,5 +114,10 @@ namespace Business.Concrete
                 return new ErrorResult();
             }
         }
+
+        public IDataResult<UserDetailsDTO> GetDetailsByUserId(int id)
+        {
+            return new SuccessDataResult<UserDetailsDTO>(_userDal.UserDetails().SingleOrDefault(u => u.UserId == id));
+        }
     }
 }

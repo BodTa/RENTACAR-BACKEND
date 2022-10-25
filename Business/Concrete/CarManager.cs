@@ -37,6 +37,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
+        //[SecuredOperation("user , admin")]
         public IDataResult<List<CarDetailsDTO>> CarDetails(Expression<Func<CarDetailsDTO, bool>> filter = null)
         {
             return new SuccessDataResult<List<CarDetailsDTO>>(_carDal.CarDetails(), Messages.Listed);

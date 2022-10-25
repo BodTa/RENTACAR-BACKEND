@@ -4,6 +4,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
+using Core.Entities.Concrete;
 using Core.Utilites.Business;
 using Core.Utilites.DataResults;
 using Core.Utilites.Results;
@@ -19,10 +20,14 @@ namespace Business.Concrete
     public class CustomerManager : ICustomerService
     {
         ICustomerDal _Customer;
-        public CustomerManager(ICustomerDal customerDal)
+        IUserOperationClaimDal _UserOperationClaim;
+
+        public CustomerManager(ICustomerDal customer, IUserOperationClaimDal userOperationClaim)
         {
-            _Customer = customerDal;
+            _Customer = customer;
+            _UserOperationClaim = userOperationClaim;
         }
+
         [CacheRemoveAspect("IColorService.Get")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult add(Customer entity)
@@ -33,6 +38,9 @@ namespace Business.Concrete
                 return new ErrorResult(result.Message);
             }
             _Customer.Add(entity);
+            var customer = _Customer.Get(c => c.Email == entity.Email);
+            _UserOperationClaim.Add(new UserOperationClaim { UserId = customer.Id, OperationClaimId = 2 });
+
             return new SuccessResult(Messages.Added);
 
         }

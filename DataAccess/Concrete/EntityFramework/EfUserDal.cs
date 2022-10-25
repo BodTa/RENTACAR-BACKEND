@@ -39,11 +39,18 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<UserDetailsDTO> UserDetails(Expression<Func<User, bool>> filter = null)
         {
-            using(var context= new SqlContext())
+            using (SqlContext context = new SqlContext())
             {
-                var result = from user in context.Users
-                             select new UserDetailsDTO { UserId = user.Id, Email = user.Email, FirstName = user.FirstName, LastName = user.LastName };
-                return result.ToList();
+                var userDetail = from user in filter is null ? context.Users : context.Users.Where(filter)
+                                 select new UserDetailsDTO
+                                 {
+                                     UserId = user.Id,
+                                     FirstName = user.FirstName,
+                                     LastName = user.LastName,
+                                     Email = user.Email,
+                                     UserPicture = context.UserPictures.FirstOrDefault(p => p.UserId == user.Id),
+                                 };
+                return userDetail.ToList();
             }
         }
     }
