@@ -25,7 +25,24 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
             }
         }
-
+        public UserDetailsDTO GetDetailsByEmail(string email)
+        {
+            using (var context = new SqlContext())
+            {
+                var result = from user in context.Users
+                             where user.Email == email
+                             select new UserDetailsDTO
+                             {
+                                 TelNumber = user.TelNumber,
+                                 Email = user.Email,
+                                 FirstName = user.FirstName,
+                                 LastName = user.LastName,
+                                 UserId = user.Id,
+                                 UserPicture = context.UserPictures.FirstOrDefault(p => p.UserId == user.Id),
+                             };
+                return result.FirstOrDefault();
+            }
+        }
         public User GetByEmail(string email)
         {
             using(var context = new SqlContext())

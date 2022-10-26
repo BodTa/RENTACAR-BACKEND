@@ -79,6 +79,7 @@ namespace Business.Concrete
             {
                 Email = customerForRegisterDto.Email,
                 FirstName = customerForRegisterDto.FirstName,
+                TelNumber = customerForRegisterDto.TelNumber,
                 LastName = customerForRegisterDto.LastName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,

@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getbyemail")]
+        [HttpGet("getdetailsbyemail")]
         public IActionResult GetUserDetailsByEmail(string email)
         {
             var result = _userService.GetDetailsByEmail(email);

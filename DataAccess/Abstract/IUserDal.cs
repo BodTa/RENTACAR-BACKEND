@@ -13,6 +13,7 @@ namespace DataAccess.Abstract
         List<OperationClaim> GetClaims(User user);
 
         User GetByEmail(string email);
+        UserDetailsDTO GetDetailsByEmail(string email);
         List<UserDetailsDTO> UserDetails(Expression<Func<User, bool>> filter = null);
     }
 }

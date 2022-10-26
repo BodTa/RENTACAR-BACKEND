@@ -83,7 +83,7 @@ namespace Business.Concrete
 
         public IDataResult<UserDetailsDTO> GetDetailsByEmail(string email)
         {
-            return new SuccessDataResult<UserDetailsDTO>(_userDal.UserDetails().SingleOrDefault(u => u.Email == email));
+            return new SuccessDataResult<UserDetailsDTO>(_userDal.GetDetailsByEmail(email));
         }
 
         public IResult UpdateByDto(UserForUpdateDTO userdto,int Id)
