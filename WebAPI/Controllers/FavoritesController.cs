@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
         [HttpPost("delete")]
         public IActionResult Delete(Favorite favorite)
         {
-            var fav = _favoriteService.GetByCarId(favorite.CarId);
+            var fav = _favoriteService.GetByCarIdAndUserId(favorite.CarId,favorite.UserId);
             var result = _favoriteService.delete(fav.Data);
             if (result.Success)
             {

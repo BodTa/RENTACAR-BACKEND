@@ -40,6 +40,7 @@ namespace DataAccess.Concrete.EntityFramework
                                      Description = car.Description,
                                      DoorCount = car.DoorCount,
                                      SellerId = car.SellerId,
+                                     Rates = context.CarRates.Where(r=>r.CarId == car.CarId).ToList(),
                                     Images= context.Images.Where(i=> i.CarId==car.CarId).ToList(),                                 
                                  };
                 return carDetails.ToList();

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Entities.Concrete;
 using Core.Utilites.DataResults;
@@ -53,7 +54,7 @@ namespace Business.Concrete
             var user = _userDal.GetAll().SingleOrDefault(u => u.Email == email);
             return new SuccessDataResult<User>(user);
         }
-
+        [SecuredOperation("user")]
         public IDataResult<UserDetailsDTO> GetDetailsById(int id)
         {
             return new SuccessDataResult<UserDetailsDTO>(_userDal.UserDetails().SingleOrDefault(u =>u.UserId==id));
@@ -80,7 +81,6 @@ namespace Business.Concrete
             var user = _userDal.Get(u => u.Id == id);
             return new SuccessDataResult<User>(user);
         }
-
         public IDataResult<UserDetailsDTO> GetDetailsByEmail(string email)
         {
             return new SuccessDataResult<UserDetailsDTO>(_userDal.GetDetailsByEmail(email));

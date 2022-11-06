@@ -25,12 +25,17 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Color> Colors { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Rental> Rentals { get; set; }
+        public DbSet<UserComment> UserComments { get; set; }
+        public DbSet<CarComment> CarComments { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<UserPicture> UserPictures { get; set; }
+
+        public DbSet<UserRate> UserRates { get; set; }
+        public DbSet<CarRate> CarRates { get; set; }
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
     }

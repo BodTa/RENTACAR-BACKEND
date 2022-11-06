@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         }
         [HttpPost("login")]
         public ActionResult Login(UserForLoginDto userForLoginDto)
-        {
+         {
             var isUserExist = _authService.UserExists(userForLoginDto.Email);
             if (!isUserExist.Success)
             {
@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
                 return BadRequest("Email or Password wrong.");
             }
         }
-        [HttpGet("refresh-token")]
+        [HttpGet("refresh")]
         public async Task<ActionResult<string>> RefreshToken()
         {
             var refreshToken = Request.Cookies["refreshToken"];

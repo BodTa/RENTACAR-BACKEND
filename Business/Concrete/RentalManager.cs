@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
@@ -24,6 +25,7 @@ namespace Business.Concrete
         }
         [CacheRemoveAspect("IRentalService.Get")]
         [ValidationAspect(typeof(RentalValidator))]
+        [SecuredOperation("user")]
         public IResult add(Rental entity)
         {
             var result = _Rent.GetAll().SingleOrDefault(p => p.CarId==entity.CarId && p.ReturnDate >= entity.RentDate/*&&p.RentDate >=entity.RentDate*/);
@@ -36,6 +38,7 @@ namespace Business.Concrete
 
         }
         [CacheRemoveAspect("IRentalService.Get")]
+        [SecuredOperation("user")]
         public IResult delete(Rental entity)
         {
             _Rent.Delete(entity);
@@ -68,6 +71,7 @@ namespace Business.Concrete
          }
 
         [CacheRemoveAspect("IRentalService.Get")]
+        [SecuredOperation("user")]
         public IResult update(Rental entity)
         {
             _Rent.Update(entity);

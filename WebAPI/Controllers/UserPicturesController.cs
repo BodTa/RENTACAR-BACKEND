@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(IFormFile file,[FromForm] UserPicture userPicture)
+        public IActionResult Add(IFormFile file,[FromForm(Name =("Id"))] UserPicture userPicture)
         {
             var result = _userPictureService.add(file, userPicture);
             if (result.Success)

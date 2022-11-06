@@ -12,7 +12,8 @@ namespace Entities.DTOS
         public int UserId { get; set; }
         public string TelNumber { get; set; }
         public string Email { get; set; }
-
+        
+        public List<UserRate> Rates { get; set; }
         public UserPicture UserPicture { get; set; }
 
 

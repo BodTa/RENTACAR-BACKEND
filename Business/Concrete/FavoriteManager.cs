@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Core.Entities;
 using Core.Entities.Concrete;
 using Core.Utilites.Business;
@@ -22,7 +23,7 @@ namespace Business.Concrete
         {
             _favoriteDal = favoriteDal;
         }
-
+        [SecuredOperation("user")]
         public IResult add(Favorite entity)
         {
             var result = BusinessRules.Run(CheckIfAlreadyExist(entity.UserId, entity.CarId));
@@ -34,6 +35,7 @@ namespace Business.Concrete
             return new ErrorResult("Car aldready in favorite car(s).");
         }
 
+        [SecuredOperation("user")]
         public IResult delete(Favorite entity)
         {
             _favoriteDal.Delete(entity);
@@ -56,9 +58,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Favorite>>(_favoriteDal.GetAll(f => f.UserId == userId));
 
         }
-        public IDataResult<Favorite> GetByCarId(int carId)
+        public IDataResult<Favorite> GetByCarIdAndUserId(int carId,int userId)
         {
-            var result = _favoriteDal.Get(f => f.CarId == carId);
+            var result = _favoriteDal.Get(f => f.CarId == carId && f.UserId == userId);
             return new SuccessDataResult<Favorite>(result);
         }
         public IResult update(Favorite entity)

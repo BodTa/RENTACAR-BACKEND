@@ -55,6 +55,20 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<EfFavoriteDal>().As<IFavoriteDal>().SingleInstance();
             builder.RegisterType<FavoriteManager>().As<IFavoriteService>().SingleInstance();
+
+            builder.RegisterType<EfCarRateDal>().As<ICarRateDal>().SingleInstance();
+            builder.RegisterType<CarRateManager>().As<ICarRateService>().SingleInstance();
+
+            builder.RegisterType<EfUserRateDal>().As<IUserRateDal>().SingleInstance();
+            builder.RegisterType<UserRateManager>().As<IUserRateService>().SingleInstance();
+
+            builder.RegisterType<EfUserCommentDal>().As<IUserCommentDal>().SingleInstance();
+            builder.RegisterType<UserCommentManager>().As<IUserCommentService>().SingleInstance();
+
+            builder.RegisterType<EfCarCommentDal>().As<ICarCommentDal>().SingleInstance();
+            builder.RegisterType<CarCommentManager>().As<ICarCommentService>().SingleInstance();
+
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

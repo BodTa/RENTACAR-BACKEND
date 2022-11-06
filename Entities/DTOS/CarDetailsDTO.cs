@@ -20,6 +20,7 @@ namespace Entities.DTOS
         public string Description { get; set; }
         public int ModelYear { get; set; }
         public List<Image> Images { get; set; }
+        public List<CarRate> Rates { get; set; }
         public short DoorCount { get; set; }
         public short EngineCapacity { get; set; }
         public short HorsePower { get; set; }

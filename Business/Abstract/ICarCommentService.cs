@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IFavoriteService : IServiceRepository<Favorite>
+    public interface ICarCommentService : IServiceRepository<CarComment>
     {
-        public IDataResult<List<Favorite>>  GetByUserId(int userId);
-        public IDataResult<Favorite> GetByCarIdAndUserId(int carId, int userId);
+        public IDataResult<List<CarComment>> GetByCarId(int carId);
     }
 }

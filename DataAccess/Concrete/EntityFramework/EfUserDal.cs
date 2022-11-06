@@ -38,6 +38,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  FirstName = user.FirstName,
                                  LastName = user.LastName,
                                  UserId = user.Id,
+                                 Rates = context.UserRates.Where(r => r.UserId == user.Id).ToList(),
                                  UserPicture = context.UserPictures.FirstOrDefault(p => p.UserId == user.Id),
                              };
                 return result.FirstOrDefault();
@@ -63,8 +64,11 @@ namespace DataAccess.Concrete.EntityFramework
                                  {
                                      UserId = user.Id,
                                      FirstName = user.FirstName,
+                                     TelNumber = user.TelNumber,
                                      LastName = user.LastName,
                                      Email = user.Email,
+                                     Rates = context.UserRates.Where(r => r.UserId == user.Id).ToList(),
+
                                      UserPicture = context.UserPictures.FirstOrDefault(p => p.UserId == user.Id),
                                  };
                 return userDetail.ToList();
