@@ -84,7 +84,14 @@ namespace WebAPI.Controllers
                 return token.Data.Token;
             }
             return ("Invalid Refresh Token");
-        } 
+        }
+        [HttpGet("logout")]
+        public async Task<ActionResult> Logout()
+        {
+
+            Response.Cookies.Append("refreshToken", "");
+            return Ok();
+        }
         protected string? GetIpAddress()
         {
             if (Request.Headers.ContainsKey("X-Forwarded-For")) return Request.Headers["X-Forwarded-For"];

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOS;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -39,7 +40,7 @@ namespace WebAPI.Controllers
         [HttpGet("getdetailsbyid")]
         public IActionResult GetDetailById(int id)
         {
-            var result= _carservice.GetDetailById(id);
+            var result = _carservice.GetDetailById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -50,6 +51,16 @@ namespace WebAPI.Controllers
         public IActionResult Add(Car car)
         {
             var result = _carservice.add(car);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("addwithimages")]
+        public IActionResult AddWithImages([FromForm] AddCarWithImagesDTO entity)
+        {
+            var result = _carservice.AddWithImages(entity);
             if (result.Success)
             {
                 return Ok(result);
@@ -133,7 +144,7 @@ namespace WebAPI.Controllers
         {
             var result = _carservice.GetAllBySellerId(id);
             int lastindex = result.Data.Count();
-            var lastcar = result.Data[lastindex-1];
+            var lastcar = result.Data[lastindex - 1];
             if (lastcar != null)
             {
                 return Ok(lastcar);
@@ -150,6 +161,12 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest();
+        }
+        [HttpPost("deletewithcarid")]
+        public IActionResult DeleteWithCarId([FromBody] int id)
+        {
+            var result = _carservice.DeleteWithId(id);
+            return result.Success ? Ok(result) : BadRequest();
         }
     }
 }

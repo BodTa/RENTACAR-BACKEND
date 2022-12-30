@@ -17,10 +17,10 @@ namespace Business.Concrete
 {
     public class ImageManager : IImageService
     {
-        IImageDal _ımageDal;
+        IImageDal _imageDal;
         public ImageManager(IImageDal ımageDal)
         {
-            _ımageDal = ımageDal;
+            _imageDal = ımageDal;
             
         }
         [CacheRemoveAspect("IImageService.Get")]
@@ -38,36 +38,37 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.NotAdded);
             }
             entity.ImagePath = ımage.Message;
-            _ımageDal.Add(entity);
+            _imageDal.Add(entity);
             return new SuccessResult(Messages.Added);
         }
         [CacheRemoveAspect("IImageService.Get")]
         public IResult delete(Image entity)
         {
-            var result = _ımageDal.Get(p => p.ImageId == entity.ImageId);
-            _ımageDal.Delete(result);
+            var result = _imageDal.Get(p => p.ImageId == entity.ImageId);
+            _imageDal.Delete(result);
             return new SuccessResult(Messages.Deleted);
         }
         [CacheAspect]
         public IDataResult<List<Image>> GetAll()
         {
-            return new SuccessDataResult<List<Image>>(_ımageDal.GetAll(), Messages.Listed);
+            return new SuccessDataResult<List<Image>>(_imageDal.GetAll(), Messages.Listed);
         }
 
         public IDataResult<Image> GetById(int id)
         {
-            return new SuccessDataResult<Image>(_ımageDal.Get(p => p.ImageId == id),Messages.Listed);
+            return new SuccessDataResult<Image>(_imageDal.Get(p => p.ImageId == id),Messages.Listed);
         }
+        [CacheAspect]
 
         public IDataResult<List<Image>> GeyByCarId(int carid)
         {
-            return new SuccessDataResult<List<Image>>(_ımageDal.GetAll(c => c.CarId == carid), Messages.Listed);
+            return new SuccessDataResult<List<Image>>(_imageDal.GetAll(c => c.CarId == carid), Messages.Listed);
         }
         [CacheRemoveAspect("IImageService.Get")]
         public IResult update(IFormFile file, Image entity)
         {
 
-            var isImage = _ımageDal.Get(c => c.ImageId == entity.ImageId);
+            var isImage = _imageDal.Get(c => c.ImageId == entity.ImageId);
             if (isImage == null)
             {
                 return new ErrorResult();
@@ -79,13 +80,13 @@ namespace Business.Concrete
                 return new ErrorResult(updatedFile.Message);
             }
             entity.ImagePath = updatedFile.Message;
-            _ımageDal.Update(entity);
+            _imageDal.Update(entity);
             return new SuccessResult(Messages.Updated);
         }
 
         private IResult CheckIfImageCount(int carid)
         {
-            var result = _ımageDal.GetAll(p => p.CarId == carid).Count;
+            var result = _imageDal.GetAll(p => p.CarId == carid).Count;
             if (result > 5)
             {
                 return new ErrorResult(Messages.NotAdded);
@@ -97,7 +98,7 @@ namespace Business.Concrete
             try
             {
                 string path = @"\uploads\images \logo.jpg";
-                var result = _ımageDal.GetAll(c => c.CarId == id).Any();
+                var result = _imageDal.GetAll(c => c.CarId == id).Any();
                 if (!result)
                 {
                     List<Image> carimage = new List<Image>();
@@ -111,7 +112,31 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<Image>>(exception.Message);
             }
 
-            return new SuccessDataResult<List<Image>>(_ımageDal.GetAll(p => p.CarId == id).ToList());
+            return new SuccessDataResult<List<Image>>(_imageDal.GetAll(p => p.CarId == id).ToList());
+        }
+
+        [CacheRemoveAspect("IImageService.Get")]
+        public IResult AddMultiple(List<IFormFile> files,int carId)
+        {
+            foreach(IFormFile file in files)
+            {
+                var imagePath = FileHelper.Upload(file);
+                
+                if (imagePath.Success) { _imageDal.Add(new Image { CarId = carId, ImagePath = imagePath.Message }); }
+                else { return new ErrorResult("Error Accured"); }
+            }
+            return new SuccessResult();
+        }
+
+        [CacheRemoveAspect("IImageService.Get")]
+        public IResult DeleteWithCarId(int id)
+        {
+             var images = _imageDal.GetAll(c => c.CarId == id);
+             foreach(Image image in images)
+            {
+                _imageDal.Delete(image);
+            }
+            return new SuccessResult();
         }
     }
 }

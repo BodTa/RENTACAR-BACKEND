@@ -1,6 +1,8 @@
 ﻿using Core.Utilites.DataResults;
+using Core.Utilites.Results;
 using Entities.Concrete;
 using Entities.DTOS;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -19,5 +21,8 @@ namespace Business.Abstract
         IDataResult<List<CarDetailsDTO>> GetByBrandAndColor(int brandId, int colorId);
         IDataResult<List<CarDetailsDTO>> GetAllBySellerId(int sellerId);
         IDataResult<CarDetailsDTO> GetDetailById(int id);
+
+        IResult DeleteWithId(int id);
+        IResult AddWithImages(AddCarWithImagesDTO entity);
     }
 }

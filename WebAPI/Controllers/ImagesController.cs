@@ -51,15 +51,27 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add([FromForm(Name = ("Image"))] IFormFile file, [FromForm] Image image)
+        public IActionResult Add(IFormFile file, [FromForm(Name = ("Id"))] Image image)
         {
-            var result = _ımagesService.add(file,image);
+            var result = _ımagesService.add(file, image);
             if (result.Success)
-            {   
+            {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+        [HttpPost("addmultiple")]
+        public IActionResult AddMultiple(List<IFormFile> files, [FromForm(Name = ("Id"))] int carId)
+        {
+            var result = _ımagesService.AddMultiple(files, carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+
+        }
+
         [HttpPost("delete")]
         public IActionResult Delete([FromForm(Name = ("Id"))] int Id)
         {

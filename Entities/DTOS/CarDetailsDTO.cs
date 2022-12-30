@@ -13,7 +13,8 @@ namespace Entities.DTOS
         public int SellerId { get; set; }
         public int BrandId { get; set; }
         public int ColorId { get; set; }
-        public string CarName { get; set; }
+        public string CarModel { get; set; }
+        public string CarType { get; set; }
         public int CarId { get; set; }
         public string ColorName { get; set; }
         public decimal DailyPrice { get; set; }

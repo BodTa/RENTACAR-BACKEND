@@ -20,7 +20,7 @@ namespace Core.Helpers
             }
 
             var type = Path.GetExtension(file.FileName); // Uzantıyı alıyoruz.
-            var typeValid = CheckFileTypeValid(type); // Type'ı alıyoruz.
+            var typeValid = CheckFileTypeValid(type); // Type'ı kontrol ediyoruz.
             var randomName = Guid.NewGuid().ToString(); // Random bir identify oluşturuyor.
 
             if (typeValid.Message != null) // Mesaj nulldan farklı ise alttaki kodu çalıştırıyoruz.
